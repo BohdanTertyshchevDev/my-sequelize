@@ -22,9 +22,10 @@ module.exports.findAll = async (req, res, next) => {
 
 module.exports.findOnePK = async(res, req, next) => {
     try {
-        const {params: {id}} = req;
-        const findUser = await User.findByPK(id);
-        return res.status(200).send(findUser);
+        // const {params: {id}} = req;
+        // const findUser = await User.findByPk(id);
+        const { userInstance } = req;
+        return res.status(200).send(userInstance);
     } catch (error) {
         next(error);
     }
@@ -70,9 +71,10 @@ module.exports.deleteByPK = async(req, res, next) => {
 
 module.exports.updateUser = async(req, res, next) => {
     try {
-        const {params: {id}, body} = req;
-        const foundedUser = await User.findByPk(id);
-        const result = await foundedUser.update(body);
+        const {body} = req;
+        // const foundedUser = await User.findByPk(id);
+        const { userInstance } = req;
+        const result = await userInstance.update(body);
         return res.status(200).send(result);
     } catch (error) {
         next(error);
