@@ -26,6 +26,6 @@ module.exports.getCountOfTasks = async(req, res, next) => {
         const tasks = await userInstance.countTasks();
         return res.status(200).send(`${tasks}`);
     } catch (error) {
-        next(error);
+        next(error)
     }
 }

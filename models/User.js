@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Task, {
         foreignKey: 'userId'
       });
+      User.belongsToMany(models.Group, {
+        through: 'users_to_groups',
+        foreignKey: 'userId'
+      });
     }
   }
   User.init({
@@ -23,7 +27,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: true,
-        notEmpty: true    
+        notEmpty: true
       }
     },
     lastName: {
@@ -32,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       validate: {
         notNull: true,
-        notEmpty: true    
+        notEmpty: true
       }
     },
     email: {
@@ -40,7 +44,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true  
+        isEmail: true
       }
     },
     password: {
@@ -51,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATEONLY,
       validate: {
         isDate: true,
-        isBefore: new Date().toDateString()   
+        isBefore: new Date().toDateString()
       }
     },
     gender: {

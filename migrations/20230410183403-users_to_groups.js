@@ -1,8 +1,9 @@
 'use strict';
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('tasks', {
+  async up (queryInterface, Sequelize) {
+    await queryInterface.createTable('users_to_groups', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -17,20 +18,23 @@ module.exports = {
           model: {
             tableName: 'users',
             key: 'id'
-          }
-        }
+          },
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
-      body: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      isDone: {
-        field: 'is_done',
-        type: Sequelize.BOOLEAN,
-        allowNull: false
-      },
-      deadline: {
-        type: Sequelize.DATE
+      groupId: {
+        field: 'group_id',
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: {
+            tableName: 'groups',
+            key: 'id'
+          },
+        },
+        onDelete: 'cascade',
+        onUpdate: 'cascade'
       },
       createdAt: {
         field: 'created_at',
@@ -42,9 +46,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    })
   },
-  async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('tasks');
+
+  async down (queryInterface, Sequelize) {
+    await queryInterface.dropTable('users_to_groups');
   }
 };

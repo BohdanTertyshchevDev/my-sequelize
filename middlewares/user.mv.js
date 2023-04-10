@@ -2,7 +2,6 @@ const {User} = require('../models');
 const { USER_SCHEMA } = require('../schemas/user.schema');
 const UserError = require('../errors/UserError');
 
-
 module.exports.getUserInstance = async(req, res, next) => {
     try {
         const {params: {userId}} = req;
@@ -12,11 +11,10 @@ module.exports.getUserInstance = async(req, res, next) => {
         }
         req.userInstance = user;
         next();
-    } catch(error) {
+    } catch (error) {
         next(error);
     }
 }
-
 
 module.exports.validateUser = async(req, res, next) => {
     try {
