@@ -1,6 +1,6 @@
 const express = require('express');
 const router = require('./routes/index');
-const { errorHandler } = require('./ErrorHandler');
+const { errorHandler } = require('./errorHandler');
 
 const app = express();
 
